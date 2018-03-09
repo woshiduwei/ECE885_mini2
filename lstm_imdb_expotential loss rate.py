@@ -74,7 +74,7 @@ model.fit(x_train, y_train,
           validation_data=(x_test, y_test), callbacks=[history])
 
 len = len(history.losses)
-epoch = np.arange(1, len)
+epoch = np.arange(0, len)
 import matplotlib.pyplot as plt
 plt.plot(epoch, len)
 plt.show()
