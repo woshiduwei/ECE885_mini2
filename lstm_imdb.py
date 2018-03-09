@@ -42,4 +42,4 @@ model.fit(x_train, y_train,
 score, acc = model.evaluate(x_test, y_test,
                             batch_size=batch_size)
 print('Test score:', score)
-print('Test accuracy:', acc) #donexx
+print('Test accuracy:', acc) #d
