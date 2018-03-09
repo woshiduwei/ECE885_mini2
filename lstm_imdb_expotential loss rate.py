@@ -24,12 +24,12 @@ x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
 print('x_train shape:', x_train.shape)
 print('x_test shape:', x_test.shape)
 
-class TestCallback(keras.callbacks.Callback):
-    def __init__(self, test_data):
-        self.test_data = test_data
+class LossHistory(keras.callbacks.Callback):
+    def on_train_begin(self, logs={}):
+        self.losses = []
 
-    def on_epoch_begin(self, epoch, logs={}):
-        loss, acc = self.model.evaluate(x_train, y_train, verbose=0)
+    def on_epoch_end(self, epoch, logs=None):
+        self.losses.append(logs.get('loss'))
 
 def step_decay(initial_rate):
    loss, acc = model.evaluate(x_train, y_train, verbose=0)
@@ -71,7 +71,13 @@ history = LossHistory()
 model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=5,
-          validation_data=(x_test, y_test))
+          validation_data=(x_test, y_test), callbacks=[history])
+
+len = len(history.losses)
+epoch = np.arange(1, len)
+import matplotlib.pyplot as plt
+plt.plot(epoch, len)
+plt.show()
 score, acc = model.evaluate(x_test, y_test,
                             batch_size=batch_size)
 print('Test score:', score)
