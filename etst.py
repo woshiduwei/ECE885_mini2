@@ -5,7 +5,16 @@ from keras.models import Sequential
 from keras.layers import Dense, Embedding
 from keras.layers import LSTM
 from keras.datasets import imdb
+import tensorflow as tf
+import keras.backend.tensorflow_backend as KTF
 
+KTF.set_session(tf.Session(config=tf.ConfigProto(device_count={'gpu': 0})))
+from tensorflow.python.client import device_lib
+print(device_lib.list_local_devices())
+import tensorflow as tf
+sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
+from keras import backend as K
+K.tensorflow_backend._get_available_gpus()
 max_features = 20000
 maxlen = 400  # cut texts after this number of words (among top max_features most common words)
 batch_size = 100
