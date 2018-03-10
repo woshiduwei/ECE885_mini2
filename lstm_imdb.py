@@ -5,7 +5,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Embedding
 from keras.layers import LSTM
 from keras.datasets import imdb
-
+import keras
 max_features = 20000
 maxlen = 400  # cut texts after this number of words (among top max_features most common words)
 batch_size = 100
@@ -29,6 +29,7 @@ model.add(LSTM(64, dropout= 0.2, return_sequences=True))
 model.add(LSTM(32, dropout = 0.2))
 model.add(Dense(1, activation='sigmoid'))
 
+adammax = keras.optimizers.Adamax(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0)
 # try using different optimizers and different optimizer configs
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
