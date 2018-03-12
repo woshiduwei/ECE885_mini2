@@ -132,5 +132,5 @@ import matplotlib.pyplot as plt
 plt.figure(1)
 plt.plot(epoch, losshistory)
 pl.xlabel('epoch')# make axis labels
-pl.ylabel('accuracy')
+pl.ylabel('log loss')
 plt.show()
